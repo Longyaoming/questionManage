@@ -34,6 +34,7 @@
 <script lang="ts">
 import { Component, Vue, Provide }  from 'vue-property-decorator';
 import LoginHeader from './LoginHeader.vue';
+import { $http } from '@/axiosRequest/request'
 
 @Component({
     components: {
@@ -61,6 +62,9 @@ export default class Login extends Vue{
         (this.$refs["ruleForm"] as any).validate((valid : Boolean) => {
             if(valid){
                 console.log("成功");
+                //加载loading框
+                let res = $http("/api/users/login",this.ruleInfo);
+                console.log(res);
             }else{
                 console.log("err");
                 return false;

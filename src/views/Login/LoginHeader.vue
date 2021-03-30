@@ -2,7 +2,7 @@
   <div class="login-header">
       <div class="logoHeader">
         <!-- <img src="@/assets/img/logo.png"/> -->
-        <h1>xxx后台管理系统</h1>
+        <span class="title">问答后台管理系统</span>
       </div>
       <div class="logonInfo">
           夜来风月声，花落知多少
