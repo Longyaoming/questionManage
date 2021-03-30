@@ -19,12 +19,12 @@
             </el-form-item>
             <!--登陆button-->
             <el-form-item>
-                <el-button type="primary" style="width:100%;" @click.native.prevent="submitLogin()">登录</el-button>
+                <el-button :loading="isLoading" type="primary" style="width:100%;" @click.native.prevent="submitLogin()">登录</el-button>
             </el-form-item>
             <!--7天自动登录和忘记密码-->
             <el-form-item>
                 <el-checkbox v-model="ruleInfo.autologin" :checked="ruleInfo.autologin">7天自动登录</el-checkbox>
-                <el-button type="text" @click="$router.push({name:'password'})" class="forget-password">忘记密码</el-button>
+                <el-button type="text" @click="$router.push({name:'Password'})" class="forget-password">忘记密码</el-button>
             </el-form-item>
         </el-form>
     </LoginHeader>
@@ -42,6 +42,7 @@ import { $http } from '@/axiosRequest/request'
     },
 })
 export default class Login extends Vue{
+    @Provide() isLoading: Boolean = false;  //默认关闭按钮旋转
     @Provide() ruleInfo: {
         username:String,
         pwd:String,
@@ -58,16 +59,20 @@ export default class Login extends Vue{
     }
 
     //点击登录
-    submitLogin(): void{
+    submitLogin(): void {
         (this.$refs["ruleForm"] as any).validate((valid : Boolean) => {
             if(valid){
-                console.log("成功");
                 //加载loading框
-                let res = $http("/api/users/login",this.ruleInfo);
-                console.log(res);
-            }else{
-                console.log("err");
-                return false;
+                this.isLoading = true;
+                $http("/api/users/login",this.ruleInfo)
+                .then((res: any) => {
+                    this.isLoading = false;
+                    localStorage.setItem("tsToken",res.token);
+                    this.$router.push({name:'Home'})
+                })
+                .catch((err: any) => {
+                    this.isLoading = false;
+                })
             }
         })
     }

@@ -11,21 +11,31 @@ const routes: Array<RouteConfig> = [
     component: Home
   },
   {
-    path: '/login',
-    name: 'login',
+    path: '/Login',
+    name: 'Login',
     component: () => import("@/views/Login/Login.vue")
   },
   {
-    path: '/password',
-    name: 'password',
+    path: '/Password',
+    name: 'Password',
     component: () => import("@/views/Login/Password.vue")
   },
 ]
 
-const router = new VueRouter({
+
+const router:any = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to:any, from:any, next:any):void => {
+  const isLogin = localStorage.tsToken ? true : false;
+  if(to.name == "Login" || to.name == "Password"){
+    next();
+  }else{
+    isLogin ? next() : next("Login")
+  }
 })
 
 export default router
