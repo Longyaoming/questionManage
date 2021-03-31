@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
 
+import LayoutWrap from '../views/LayoutWrap/Index.vue'  //布局容器
+
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
@@ -9,6 +11,11 @@ const routes: Array<RouteConfig> = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/LayoutWrap',
+    name: 'LayoutWrap',
+    component: LayoutWrap
   },
   {
     path: '/Login',
