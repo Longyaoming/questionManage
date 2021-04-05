@@ -45,6 +45,9 @@ export default class Asidebar extends Vue {
     mounted () {
         console.log("获取router:",this.getRouter);
     }
+    open(){
+        console.log("点击");
+    }
 }
 </script>
 

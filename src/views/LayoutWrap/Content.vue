@@ -10,9 +10,7 @@
         <div class="breadWrap">
             <i class="fa fa-reorder" style="margin-right:10px;"></i>
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item>首页</el-breadcrumb-item>
-                <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-                <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+                <el-breadcrumb-item v-for="(item,index) in routeList" :key="index" :to="{path:item.path}">{{item.title}}</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
 
@@ -23,15 +21,39 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch, Provide } from 'vue-property-decorator';
 @Component({
   components: {
     
   },
 })
+export default class Content extends Vue {
+  @Provide() routeList:any;  
+  created () {
+    this.initRouteCurrData(this.$route);
+  }
+  
+  @Watch("$route") watchRoute(to:any,from:any){
+    console.log("aaa:",to);
+    this.initRouteCurrData(to);
+  }
 
-
-export default class Content extends Vue {}
+  initRouteCurrData(info:any):void {
+    let baseRoute = [{path:"/",title:"知识问答系统"}]
+    let currMatch = info.matched;
+    currMatch.forEach((item:any) => {
+        if(item.meta&&item.meta.title){
+          let breadcrumbItem = {
+            path:item.path ? item.path : '/',
+            title:item.meta.title 
+          }
+          baseRoute.push(breadcrumbItem);
+        }
+    })
+    console.log("路由信息：",baseRoute);
+    this.routeList = baseRoute;
+  }
+}
 </script>
 
 <style lang="scss" scoped>

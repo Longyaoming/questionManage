@@ -68,7 +68,7 @@ export default class Login extends Vue{
                 .then((res: any) => {
                     this.isLoading = false;
                     localStorage.setItem("tsToken",res.token);
-                    this.$router.push({name:'Home'})
+                    this.$router.push({name:'dashboad'})
                 })
                 .catch((err: any) => {
                     this.isLoading = false;
