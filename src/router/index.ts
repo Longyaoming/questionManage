@@ -73,7 +73,7 @@ export const asyncRouterMap = [
 
 
 const router:any = new VueRouter({
-  mode: 'history',
+  // mode: 'history', //默认用hash
   base: process.env.BASE_URL,
   routes:asyncRouterMap
 })

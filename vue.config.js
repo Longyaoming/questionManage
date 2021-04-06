@@ -1,4 +1,9 @@
 module.exports = {
+    publicPath: './', // 基本路径
+    outputDir: 'dist', // 输出文件目录
+    assetsDir: 'static',
+
+
     // 反向代理
     devServer: {
         open: true,
@@ -18,5 +23,14 @@ module.exports = {
         }
         },
         before: app => {}
-    }
+    },
+    configureWebpack: (config) => {
+        if (process.env.NODE_ENV === 'production') {// 为生产环境修改配置...
+          config.mode = 'production';
+          config["performance"] = {//打包文件大小配置
+            "maxEntrypointSize": 10000000,
+            "maxAssetSize": 30000000
+          }
+        }
+      }
 }
