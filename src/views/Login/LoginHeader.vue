@@ -25,7 +25,7 @@ export default class LayoutHeader extends Vue{}
 
 <style lang="scss" scoped>
 .login-header{
-    width:50%;
+    width:30%;
     margin:0 auto;
     display: flex;
     flex-direction: column;

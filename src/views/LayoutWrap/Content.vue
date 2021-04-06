@@ -39,7 +39,8 @@ export default class Content extends Vue {
   }
 
   initRouteCurrData(info:any):void {
-    let baseRoute = [{path:"/",title:"知识问答系统"}]
+    // {path:"/",title:"知识问答系统"}
+    let baseRoute:any = []
     let currMatch = info.matched;
     currMatch.forEach((item:any) => {
         if(item.meta&&item.meta.title){

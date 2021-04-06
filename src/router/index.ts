@@ -8,7 +8,7 @@ Vue.use(VueRouter)
 
 export const asyncRouterMap = [
   {
-    path: '/',
+    path: '/dashboad',
     name: 'dashboad',
     component: LayoutWrap,
     redirect: '/home',
@@ -50,7 +50,7 @@ export const asyncRouterMap = [
   },
   
   {
-    path: '/Login',
+    path: '/',
     name: 'Login',
     component: () => import("@/views/Login/Login.vue")
   },
