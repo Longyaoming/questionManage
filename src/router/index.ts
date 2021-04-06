@@ -79,12 +79,14 @@ const router:any = new VueRouter({
 })
 
 router.beforeEach((to:any, from:any, next:any):void => {
-  const isLogin = localStorage.tsToken ? true : false;
-  if(to.name == "Login" || to.name == "Password"){
-    next();
-  }else{
-    isLogin ? next() : next("Login")
-  }
+  //暂时不用token（等待接口来的时候再加token验证）
+  // const isLogin = localStorage.tsToken ? true : false;
+  // if(to.name == "Login" || to.name == "Password"){
+  //   next();
+  // }else{
+  //   isLogin ? next() : next("Login")
+  // }
+  next();
 })
 
 export default router
