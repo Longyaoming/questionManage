@@ -34,7 +34,6 @@
 <script lang="ts">
 import { Component, Vue, Provide }  from 'vue-property-decorator';
 import LoginHeader from './LoginHeader.vue';
-import { $http } from '@/axiosRequest/request'
 
 @Component({
     components: {
@@ -64,13 +63,21 @@ export default class Login extends Vue{
             if(valid){
                 //加载loading框
                 this.isLoading = true;
-                $http("/api/users/login",this.ruleInfo)
+                // $http("/api/users/login",this.ruleInfo)
+                // .then((res: any) => {
+                //     this.isLoading = false;
+                //     localStorage.setItem("tsToken",res.token);
+                //     this.$router.push({name:'dashboad'})
+                // })
+                // .catch((err: any) => {
+                //     this.isLoading = false;
+                // })
+                (this as any).$http('/login/login',this.ruleInfo)
                 .then((res: any) => {
                     this.isLoading = false;
-                    localStorage.setItem("tsToken",res.token);
                     this.$router.push({name:'dashboad'})
                 })
-                .catch((err: any) => {
+                .catch((err:any) => {
                     this.isLoading = false;
                 })
             }

@@ -11,6 +11,11 @@ import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI);
 
 Vue.config.productionTip = false
+//全局引入http,且挂载在vue原型上
+import { $http } from '@/axiosRequest/request'
+Vue.prototype.$http = $http;
+//引入mock
+require('@/mock')
 
 new Vue({
   router,
