@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
 import { State, Getter, Mutation, Action } from 'vuex-class'
 @Component({
   components: {
@@ -41,12 +41,8 @@ import { State, Getter, Mutation, Action } from 'vuex-class'
 
 export default class Asidebar extends Vue {
     @Getter('routers') getRouter: any;
-
-    mounted () {
-        console.log("获取router:",this.getRouter);
-    }
-    open(){
-        console.log("点击");
+    @Watch("$route") watchRoute(to:any, from:any){
+        this.$forceUpdate();
     }
 }
 </script>

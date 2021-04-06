@@ -10,7 +10,7 @@
         <div class="breadWrap">
             <i class="fa fa-reorder" style="margin-right:10px;"></i>
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item v-for="(item,index) in routeList" :key="index" :to="{path:item.path}">{{item.title}}</el-breadcrumb-item>
+                <el-breadcrumb-item @click.native="breadcrumbChange(item)" v-for="(item,index) in routeList" :key="index" :to="{path:item.path}">{{item.title}}</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
 
@@ -50,8 +50,17 @@ export default class Content extends Vue {
           baseRoute.push(breadcrumbItem);
         }
     })
-    console.log("路由信息：",baseRoute);
     this.routeList = baseRoute;
+  }
+
+  breadcrumbChange(item:any){
+    console.log("item:",item);
+    this.$forceUpdate();
+    if(item.path === "/"){
+      console.log("aaa:",this.$router.currentRoute);
+      // console.log("首页:",item.path);
+      // this.$router.currentRoute.path = "/home";
+    }
   }
 }
 </script>
